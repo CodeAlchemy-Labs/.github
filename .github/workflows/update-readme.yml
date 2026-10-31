@@ -1,0 +1,184 @@
+name: Update Organization README
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'profile/README.md'
+      - 'scripts/update_readme.py'
+      - 'requirements.txt'
+      - '.github/workflows/update-readme.yml'
+
+concurrency:
+  group: update-readme-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    name: Regenerate profile/README.md
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ORG: CodeAlchemy-Labs
+      README_PATH: profile/README.md
+
+    steps:
+      - name: Start timer
+        id: timer
+        run: echo "start_epoch=$(date -u +%s)" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate organization read token
+        env:
+          GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os
+          import sys
+
+          import requests
+
+          token = os.environ.get("GH_TOKEN")
+          if not token:
+              print("ERROR: Missing GH_TOKEN / ORG_READ_TOKEN.", file=sys.stderr)
+              raise SystemExit(1)
+
+          try:
+              response = requests.get(
+                  "https://api.github.com/user",
+                  headers={
+                      "Authorization": "Bearer " + token,
+                      "Accept": "application/vnd.github+json",
+                      "User-Agent": "CodeAlchemy-Labs-README-Updater",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                  },
+                  timeout=30,
+              )
+          except requests.RequestException as exc:
+              print(f"ERROR: Unable to validate GH_TOKEN: {exc}", file=sys.stderr)
+              raise SystemExit(1)
+
+          if response.status_code in (401, 403):
+              print("ERROR: GitHub rejected ORG_READ_TOKEN. Verify that it is valid, not expired, and has read access.", file=sys.stderr)
+              raise SystemExit(1)
+          if response.status_code >= 400:
+              print(f"ERROR: Token validation failed with HTTP {response.status_code}.", file=sys.stderr)
+              raise SystemExit(1)
+
+          try:
+              payload = response.json()
+          except ValueError:
+              print("ERROR: GitHub returned invalid JSON while validating the token.", file=sys.stderr)
+              raise SystemExit(1)
+          print(f"Validated token for login: {payload.get('login', 'unknown')}")
+          PY
+
+      - name: Self-test updater
+        run: python scripts/update_readme.py --self-test
+
+      - name: Run README updater
+        env:
+          GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
+          ORG: CodeAlchemy-Labs
+          README_PATH: profile/README.md
+        run: |
+          set -o pipefail
+          python scripts/update_readme.py > /tmp/readme_update.log 2>&1
+          cat /tmp/readme_update.log
+
+      - name: Guard generated markers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          readme = Path("profile/README.md").read_text(encoding="utf-8")
+          markers = (
+              ("projects", "<!-- PROJECTS_START -->", "<!-- PROJECTS_END -->"),
+              ("stats", "<!-- STATS_START -->", "<!-- STATS_END -->"),
+          )
+
+          for label, start_marker, end_marker in markers:
+              start_index = readme.find(start_marker)
+              end_index = readme.find(end_marker, start_index if start_index >= 0 else 0)
+              if start_index < 0 or end_index < 0:
+                  raise SystemExit(f"ERROR: README marker pair missing for {label}.")
+              body = readme[start_index + len(start_marker):end_index].strip()
+              if not body:
+                  raise SystemExit(f"ERROR: README marker block for {label} is empty.")
+
+          print("README marker blocks are populated.")
+          PY
+
+      - name: Detect README changes
+        id: changes
+        run: |
+          if git diff --quiet -- profile/README.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push README
+        if: success() && steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/README.md
+          git commit -m "chore(readme): auto-update organization README [skip ci]"
+          git push
+
+      - name: Job summary
+        if: always()
+        env:
+          START_EPOCH: ${{ steps.timer.outputs.start_epoch }}
+        run: |
+          status="${{ job.status }}"
+          start_epoch="$START_EPOCH"
+          if ! [[ "$start_epoch" =~ ^[0-9]+$ ]]; then
+            start_epoch=$(date -u +%s)
+          fi
+          end_epoch=$(date -u +%s)
+          execution_time=$((end_epoch - start_epoch))
+          repo_count=$(python - <<'PY'
+          import re
+          from pathlib import Path
+
+          readme_path = Path("profile/README.md")
+          text = readme_path.read_text(encoding="utf-8") if readme_path.is_file() else ""
+          print(len(re.findall(r"^#### \[", text, flags=re.MULTILINE)))
+          PY
+          )
+
+          {
+            echo "Status: ${status}"
+            echo "Org: ${ORG}"
+            echo "Trigger: ${{ github.event_name }}"
+            echo "Repository count: ${repo_count}"
+            echo "Execution time: ${execution_time}s"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
