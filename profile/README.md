@@ -26,18 +26,15 @@ We are **CodeAlchemy-Labs** — a digital apothecary where:
 
 ## ⚗️ Our Experimental Brews
 
-<div align="center">
+<!-- PROJECTS_START -->
 
-| Potion | Ingredients | Effect |
-|:------:|:-----------:|:------:|
-| 🔮 **assembly-sqlite-social** | `x86-64` + `SQLite` + `Docker` | Database operations performed by talking directly to silicon |
-| 🏛️ **cobol-sqlite** | `COBOL` + `Modernity` | Proving your grandpa's language can still party |
-| ⚡ **c-wasm-playground** | `C` → `WASM` | Compiling near-metal code to run in your browser because we can |
-| 🎯 **pure-hello-world** | `Binary` + `Python` (meta!) | Hand-crafting ELF executables byte by byte, no compiler, no gods |
-| 🖼️ **PureAsmWindow** | `x86-16` + `VGA` | Graphics summoned from real mode, works on Linux/Mac/Windows because chaos is portable |
-| ☕ **quarkusdemo** | `Java` + `Supersonic` | Occasionally we use normal tech, but make it subatomic |
+<!-- PROJECTS_END -->
 
-</div>
+## 📊 Laboratory Metrics
+
+<!-- STATS_START -->
+
+<!-- STATS_END -->
 
 ---
 
