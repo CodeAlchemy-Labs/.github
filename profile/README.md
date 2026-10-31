@@ -27,13 +27,308 @@ We are **CodeAlchemy-Labs** — a digital apothecary where:
 ## ⚗️ Our Experimental Brews
 
 <!-- PROJECTS_START -->
+### Rust Projects
 
+<table>
+<tr>
+<td width="50%">
+
+#### [Tictactoe Rs](https://github.com/CodeAlchemy-Labs/tictactoe-rs)
+
+
+
+A WebSocket-based Tic-Tac-Toe game written in Rust, built as a teaching reference for secure concurrent network programming.
+
+
+
+**Stack:** `Rust` `PowerShell` `Shell` `Makefile`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/tictactoe-rs) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 1 · Forks: 1 · Issues: 0
+
+Updated: 2026-09-22
+
+</td>
+<td width="50%"></td>
+</tr>
+</table>
+
+### Assembly Projects
+
+<table>
+<tr>
+<td width="50%">
+
+#### [Pureasmwindow](https://github.com/CodeAlchemy-Labs/PureAsmWindow)
+
+
+
+Ventana gráfica interactiva creada desde cero en Assembly puro x86-16 (modo real VGA), sin librerías del sistema. Funciona en Linux, macOS y Windows.
+
+
+
+**Stack:** `Assembly` `Makefile`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/PureAsmWindow) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2026-01-22
+
+</td>
+<td width="50%">
+
+#### [Assembly Sqlite Social](https://github.com/CodeAlchemy-Labs/assembly-sqlite-social)
+
+
+
+A professional-grade demonstration connecting x86-64 Assembly with SQLite database operations inside Docker containers. This project showcases low-level programming with high-level database operations.
+
+
+
+**Stack:** `Assembly` `Shell` `Makefile`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/assembly-sqlite-social)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2026-01-06
+
+</td>
+</tr>
+</table>
+
+### Python Projects
+
+<table>
+<tr>
+<td width="50%">
+
+#### [Pure Hello World](https://github.com/CodeAlchemy-Labs/pure-hello-world)
+
+
+
+A demonstration of creating a minimal ELF64 executable in pure binary form, without using a compiler or assembler. The project highlights the structure of a Linux executable by manually crafting the ELF headers and...
+
+
+
+**Stack:** `Python` `Dockerfile` `Makefile`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/pure-hello-world) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2026-01-17
+
+</td>
+<td width="50%">
+
+#### [Live Camera Viewer In Python](https://github.com/CodeAlchemy-Labs/Live-Camera-Viewer-in-Python)
+
+
+
+A simple Python application that uses OpenCV and Tkinter to display live camera video inside a GUI window.
+
+
+
+**Stack:** `Python`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/Live-Camera-Viewer-in-Python) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2025-10-28
+
+</td>
+</tr>
+</table>
+
+### JavaScript Projects
+
+<table>
+<tr>
+<td width="50%">
+
+#### [C Wasm Playground](https://github.com/CodeAlchemy-Labs/c-wasm-playground)
+
+
+
+A minimal project to experiment with WebAssembly compiled from C, featuring a static HTML/CSS/JS frontend and Docker-based build environment.
+
+
+
+**Stack:** `JavaScript` `C` `HTML` `CSS`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/c-wasm-playground) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2025-12-08
+
+</td>
+<td width="50%"></td>
+</tr>
+</table>
+
+### Java Projects
+
+<table>
+<tr>
+<td width="50%">
+
+#### [Quarkusdemo](https://github.com/CodeAlchemy-Labs/quarkusdemo)
+
+
+
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
+
+
+
+**Stack:** `Java`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/quarkusdemo) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2026-03-09
+
+</td>
+<td width="50%">
+
+#### [Firebase Config](https://github.com/CodeAlchemy-Labs/firebase-config)
+
+
+
+This project demonstrates how to connect to Google Firestore using Java 21 and the Firebase Admin SDK. It retrieves and prints all documents from a Firestore collection.
+
+
+
+**Stack:** `Java`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/firebase-config) · [License](https://api.github.com/licenses/mit)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2025-09-23
+
+</td>
+</tr>
+</table>
+
+### COBOL Projects
+
+<table>
+<tr>
+<td width="50%">
+
+#### [Cobol Sqlite](https://github.com/CodeAlchemy-Labs/cobol-sqlite)
+
+
+
+This project demonstrates a full CRUD application in COBOL using SQLite, running inside a Docker container.
+
+
+
+**Stack:** `COBOL` `Dockerfile`
+
+
+
+[Repository](https://github.com/CodeAlchemy-Labs/cobol-sqlite)
+
+
+
+Stars: 0 · Forks: 0 · Issues: 0
+
+Updated: 2025-09-15
+
+</td>
+<td width="50%"></td>
+</tr>
+</table>
 <!-- PROJECTS_END -->
 
 ## 📊 Laboratory Metrics
 
 <!-- STATS_START -->
+### Global stats
+| Metric | Value |
+|--------|-------|
+| Total repositories | 9 |
+| Total stars | 1 |
+| Total forks | 1 |
+| Open issues | 0 |
+| Total commits | 0 |
+| Total contributors | 0 |
+| Total languages | 16 |
+| Last updated | 2026-09-22 19:25 UTC |
 
+### Top languages
+| Language | Share | Repos |
+|----------|-------|-------|
+| Rust | 71% | 1 |
+| Assembly | 8% | 2 |
+| PowerShell | 5% | 1 |
+| Shell | 4% | 2 |
+| Python | 3% | 2 |
+| JavaScript | 2% | 1 |
+| Java | 2% | 2 |
+| Makefile | 1% | 4 |
+| C | 1% | 1 |
+| Inno Setup | 1% | 1 |
+
+### Skills / tech stack
+| Category | Technologies (from detected data) |
+|----------|-----------------------------------|
+| Languages | `Rust`, `Assembly`, `PowerShell`, `Shell`, `Python`, `JavaScript`, `Java`, `Makefile`, `C`, `Inno Setup`, `HTML`, `CSS`, `Dockerfile`, `COBOL`, `Roff`, `CMake` |
+| Popular topics | N/A |
+
+### Repository freshness
+| Bucket | Count |
+|--------|-------|
+| Active | 0 |
+| Recent | 1 |
+| Stale | 8 |
+| Archived | 0 |
+
+### Top contributors
+| Contributor | Contributions | Repositories |
+|-------------|---------------|--------------|
+| N/A | 0 | 0 |
+
+_Commit activity charts will appear once GitHub finishes computing stats for this organization. The next scheduled run will include them._
 <!-- STATS_END -->
 
 ---
